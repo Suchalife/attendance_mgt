@@ -94,7 +94,7 @@ export default function HeroSection() {
               </Link>
               
               <Link
-                href="/student/demo-session"
+                href="/employee/demo-session"
                 className="group flex items-center justify-center gap-3 px-8 py-4 bg-white/80 backdrop-blur-lg text-slate-700 text-lg font-bold rounded-2xl border-2 border-slate-300 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:bg-slate-50"
               >
                 <Camera className="w-5 h-5 group-hover:rotate-12 transition-transform" />

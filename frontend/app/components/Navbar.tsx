@@ -52,27 +52,27 @@ export default function Navbar() {
                 Dashboard
               </Link>
 
-              {userType === "teacher" && (
-                <Link href="/teacher/dashboard" className="hover:text-green-400 transition-colors">
-                  Teacher Panel
+              {userType === "manager" && (
+                <Link href="/manager/dashboard" className="hover:text-green-400 transition-colors">
+                  Manager Panel
                 </Link>
               )}
 
-              {userType === "student" && (
+              {userType === "employee" && (
                 <>
-                  <Link href="/student/registrationform" className="hover:text-blue-400 transition-colors">
+                  <Link href="/employee/registrationform" className="hover:text-blue-400 transition-colors">
                     Register Face
                   </Link>
-                  <Link href="/student/updatedetails" className="hover:text-blue-400 transition-colors">
+                  <Link href="/employee/updatedetails" className="hover:text-blue-400 transition-colors">
                     Update Profile
                   </Link>
                 </>
               )}
 
-              <Link href="/student/demo-session" className="hover:text-purple-400 transition-colors">
+              <Link href="/employee/demo-session" className="hover:text-purple-400 transition-colors">
                 Demo
               </Link>
-              <Link href="/student/view-attendance" className="hover:text-orange-400 transition-colors">
+              <Link href="/employee/view-attendance" className="hover:text-orange-400 transition-colors">
                 Attendance
               </Link>
             </>
@@ -104,7 +104,7 @@ export default function Navbar() {
                 {userType && (
                   <span
                     className={`ml-1 px-2 py-1 text-xs rounded ${
-                      userType === "teacher" ? "bg-green-600" : "bg-blue-600"
+                      userType === "manager" ? "bg-green-600" : "bg-blue-600"
                     }`}
                   >
                     {userType}

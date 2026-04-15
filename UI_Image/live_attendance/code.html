@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Attendance - Industrial Intelligence</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#d8e3f5",
+                    "background": "#f6fafd",
+                    "tertiary-container": "#00855b",
+                    "surface-tint": "#005ac2",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#dfe3e6",
+                    "outline-variant": "#c2c6d6",
+                    "on-secondary-container": "#5a6574",
+                    "primary-fixed": "#d8e2ff",
+                    "primary-fixed-dim": "#adc6ff",
+                    "tertiary": "#006947",
+                    "on-background": "#171c1f",
+                    "secondary": "#545f6e",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-secondary-fixed": "#111c29",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-error": "#ffffff",
+                    "primary": "#0058be",
+                    "inverse-surface": "#2c3134",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#424754",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001a42",
+                    "surface-container-low": "#f0f4f7",
+                    "surface-container-highest": "#dfe3e6",
+                    "surface": "#f6fafd",
+                    "inverse-primary": "#adc6ff",
+                    "surface-container-high": "#e5e9ec",
+                    "on-tertiary-fixed": "#002113",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#2170e4",
+                    "on-primary-container": "#fefcff",
+                    "surface-container": "#eaeef1",
+                    "on-error-container": "#93000a",
+                    "outline": "#727785",
+                    "inverse-on-surface": "#edf1f4",
+                    "secondary-fixed": "#d8e3f5",
+                    "on-surface": "#171c1f",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#d6dbdd",
+                    "surface-bright": "#f6fafd",
+                    "on-secondary-fixed-variant": "#3d4856",
+                    "on-tertiary-container": "#f5fff6",
+                    "on-primary-fixed-variant": "#004395",
+                    "secondary-fixed-dim": "#bcc7d8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar Shell -->
+<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
+<p class="text-slate-400 text-xs font-medium tracking-tight">Recycling Ops</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="person_add">person_add</span>
+                Employee Registration
+            </a>
+<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="fingerprint">fingerprint</span>
+                Biometric Enrollment
+            </a>
+<!-- ACTIVE TAB: Attendance -->
+<a class="nav-item bg-[#0058be] text-white rounded-md mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="event_available">event_available</span>
+                Attendance
+            </a>
+<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+                Reports
+            </a>
+</nav>
+<div class="mt-auto space-y-1 pt-6 border-t border-slate-700/50">
+<a class="text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="help_outline">help_outline</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-[#f0f4f7] flex items-center justify-between px-8 z-40">
+<div class="flex items-center gap-6">
+<h2 class="font-['Inter'] font-bold text-sm tracking-wide text-on-background">Live Attendance</h2>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex gap-4">
+<span class="text-[#0058be] border-b-2 border-[#0058be] pb-1 font-bold text-sm cursor-pointer">CHN-01</span>
+<span class="text-slate-500 font-bold text-sm cursor-pointer hover:text-[#0058be] transition-opacity">BLR-02</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-tertiary-container/10 text-tertiary rounded-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">System Online</span>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 active:scale-95 transition-transform">
+                    Shift Report
+                </button>
+<div class="text-slate-500 cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Profile" data-alt="professional portrait of a middle-aged male operations manager in a smart casual attire, clean studio lighting, high resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBDAGiyFRWQXILgsRvEtd4zA1S_j7MwSk2NTFMRqXSbMEP3E0BgA0zK7i7eStVmmQ3ITRDf3XCqinAOSU3uM1mmu_AYTPwcZPTPiJwkiGmV6ZoonKrorwfiVJ7w_N1wXx8bZbHZvrzXdZnrp_VKTbguMwrtIFQYWziD3oRPcduuulX3o-Kb9Q3ZNdp7gaHDlkeoEmuA5LJBqDVLxFer9BfpWqGF2K0a2VX41LHnbG0rLESZ2gueuDSMrD_WHSxw4wX--EiyerO64zp"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-24 px-8 pb-8">
+<!-- Filter Controls -->
+<div class="mb-8 flex flex-wrap items-end justify-between gap-6">
+<div class="flex gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant px-1">Department</label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border-none rounded-lg py-3 pl-4 pr-10 text-sm font-medium min-w-[200px] focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer">
+<option>Sorting Facility A</option>
+<option>Chemical Processing</option>
+<option>Logistics &amp; Dispatch</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant px-1">Shift Selection</label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border-none rounded-lg py-3 pl-4 pr-10 text-sm font-medium min-w-[180px] focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer">
+<option>Morning (06:00 - 14:00)</option>
+<option>Evening (14:00 - 22:00)</option>
+<option>Night (22:00 - 06:00)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<button id="startAttendanceBtn" class="bg-primary hover:bg-primary-container text-white px-8 py-3 rounded-lg font-bold text-sm tracking-wide shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center gap-3">
+<span class="material-symbols-outlined">play_circle</span>
+                    Start Attendance
+                </button>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-6 items-stretch">
+<!-- Live Camera Feed (Large Left Panel) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl overflow-hidden shadow-xl shadow-on-surface/5 flex flex-col">
+<div class="p-4 flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-error animate-pulse"></div>
+<span class="font-bold text-xs uppercase tracking-tighter">CAM-04 : Entrance Turnstile</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="videocam">videocam</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="fullscreen">fullscreen</span>
+</button>
+</div>
+</div>
+<div class="relative aspect-video bg-black group">
+<img alt="Live Monitoring Feed" class="w-full h-full object-cover opacity-80" data-alt="industrial warehouse entrance with employees walking through high-tech security turnstiles, low-key lighting with sharp technical overlays and bounding boxes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAT3QIZQnQ1bEv0xuwpB2iWga2nOgXIP-SmUrsJTjs2N7tCMu_S6G7wj_O9Q_PWWZwAELhkgRaNq2pVY0RZV_H6rxQ8_rNk9MnT9tMtGGYp3Hf7Gh1ysYa4fHcVck8g9hb4oXEV6ouKrMbs6w0wZXdB95gOUtGHT_jORHcFUKzMI1PDuKPeeHY8AJNWrja4ChsQn4CJVw63eaCLLWMV7GWoUBymNVeV_HdswawCtsTtsJxE4GfD5fi-9WQkGrr98FIkX2fwVG_RWoy"/>
+<!-- AI Overlay: Recognized -->
+<div class="absolute top-1/4 left-1/3 w-32 h-48 border-2 border-tertiary-fixed-dim rounded-sm">
+<div class="absolute -top-6 left-0 bg-tertiary-fixed-dim text-on-tertiary-fixed px-1.5 py-0.5 text-[10px] font-bold rounded-sm uppercase">
+                                ID: 8842 [CONF 98%]
+                            </div>
+</div>
+<!-- AI Overlay: Unknown -->
+<div class="absolute top-1/3 right-1/4 w-36 h-52 border-2 border-error rounded-sm">
+<div class="absolute -top-6 left-0 bg-error text-white px-1.5 py-0.5 text-[10px] font-bold rounded-sm uppercase">
+                                UNKNOWN [ALERT]
+                            </div>
+</div>
+<!-- Overlay HUD -->
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<div class="glass-panel p-4 rounded-lg border border-white/20">
+<div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mb-1">Current Throughput</div>
+<div class="text-2xl font-extrabold text-on-surface tracking-tight">42 <span class="text-xs font-medium text-slate-500">P/MIN</span></div>
+</div>
+<div class="flex flex-col gap-2 items-end">
+<div class="glass-panel px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20">
+<span class="text-[10px] font-bold uppercase">Thermal: 36.6°C</span>
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+</div>
+<div class="glass-panel px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/20">
+<span class="text-[10px] font-bold uppercase">PPE Status: Pass</span>
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recognized Employees (Right Panel) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl shadow-xl shadow-on-surface/5 flex flex-col max-h-[600px]">
+<div class="p-6 border-b border-surface-container-low">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-bold text-sm tracking-wide">Recognized Employees</h3>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Live Stream</span>
+</div>
+<p class="text-xs text-on-surface-variant">Last updated: 14:22:45</p>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-1">
+<!-- Employee Item: Present -->
+<div class="flex items-center gap-4 p-4 rounded-lg hover:bg-surface-container-low transition-colors group">
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden">
+<img alt="Employee" data-alt="headshot of a male factory worker in safety gear, professional studio lighting, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSYXaBfnThbMbrOaSLd9LfOHGD_GcagXCtyyjPz4TQjahFAB0Qg6PDRrcJ-ZchBLb7a-gw0ZuJmvMwVjCfzU719G0juD7L3gPvU8EmAeyBebxDlHdj7sSE01Et1FiTYSS0QpIO9qEUKhRuICJTzrTsw_r0jhPIIoAKTnsEh5Qy2IjYu1hSOsP6UNEFVSdWOKLfrRKrOPyFBh2FvfEe7G7hYgophsMU1J0SwTUW_WPgydXao7_FJMzCF0q8i_8CT5sFPKiQ09s9288m"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-tertiary border-2 border-white"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm truncate">Marcus Chen</h4>
+<span class="text-[10px] font-medium text-slate-400">14:22</span>
+</div>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">ID: 8842 • Logistics</p>
+</div>
+<div class="px-2 py-1 bg-tertiary-container/10 text-tertiary text-[9px] font-bold rounded uppercase tracking-tighter">
+                                Present
+                            </div>
+</div>
+<!-- Employee Item: Processing -->
+<div class="flex items-center gap-4 p-4 rounded-lg hover:bg-surface-container-low transition-colors group">
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden grayscale">
+<img alt="Employee" data-alt="professional portrait of a female worker with neutral expression, soft studio lighting, industrial uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiTqNMzwLjxwY39UqsQpBr1qJOawEiywzY1UZ-DMVV68QmXBaQ8Vb6Za8zTzV6z9vIRcwzseMZfBYfaB4jZcT91KEYOGF1r4ZdaF9iThEdlWPVAp9ommbH4U0RkKlakbv9DTv0wh851-ybGmGl3DtP22W2kRouxnbx5N68zo8RGdhnjJtx62LpAT0aZNuc83jyASosByIW1WcX7fRoGlvJLSZ-zJOcavEDq_oFISI6XyVpGsf0EwH3zec-FeDPIo5ii4Ozj5MhEjta"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-yellow-500 border-2 border-white animate-pulse"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm truncate">Sarah Jenkins</h4>
+<span class="text-[10px] font-medium text-slate-400">14:21</span>
+</div>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">ID: 4122 • Sorting</p>
+</div>
+<div class="px-2 py-1 bg-yellow-500/10 text-yellow-600 text-[9px] font-bold rounded uppercase tracking-tighter">
+                                Processing
+                            </div>
+</div>
+<!-- Employee Item: Unknown -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-error-container/10 group">
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="person_off">person_off</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-error border-2 border-white"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-error truncate">Unrecognized Person</h4>
+<span class="text-[10px] font-medium text-slate-400">14:21</span>
+</div>
+<p class="text-[10px] text-error uppercase tracking-wider">Unknown Subject • Gate 04</p>
+</div>
+<div class="px-2 py-1 bg-error text-white text-[9px] font-bold rounded uppercase tracking-tighter">
+                                Unknown
+                            </div>
+</div>
+<!-- Employee Item: Present -->
+<div class="flex items-center gap-4 p-4 rounded-lg hover:bg-surface-container-low transition-colors group">
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest overflow-hidden">
+<img alt="Employee" data-alt="professional male profile, clean cut, indoor lighting, industrial context" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBplXRk0ZtyNWFSnbYyNQ4imCHOGDR7e2JC6oRDOnRJXexeZQzApTnHPsfj46ytCAltUa2rB-ioa5ArjIC3NEWSrWJNVkQRp1YUF_DVvNuAyfN8EMWNS8OcA4Z7nom4HMrbzvqqML_N_oBRtcQ4OWWFqL1nZ-pDeUptpTeZckEXXQKHpP7TGVKPzzAfIlh9zKdSU0T5JhPEpSn0bBSEL-3qpr2o_pVSxzvzXLz0eI2F-vRapTs2DLOPCYqIhkj0UPtMcyQraGdrZoTR"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-tertiary border-2 border-white"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm truncate">Robert Miller</h4>
+<span class="text-[10px] font-medium text-slate-400">14:20</span>
+</div>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">ID: 9921 • Management</p>
+</div>
+<div class="px-2 py-1 bg-tertiary-container/10 text-tertiary text-[9px] font-bold rounded uppercase tracking-tighter">
+                                Present
+                            </div>
+</div>
+<!-- More items... -->
+</div>
+<div class="p-4 bg-surface-container-low">
+<button class="w-full py-2 text-xs font-bold text-primary uppercase tracking-widest hover:underline transition-all">
+                            View Full History
+                        </button>
+</div>
+</div>
+</div>
+<!-- Bottom Stats / Bento Items -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary flex flex-col justify-between h-32">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Shift Coverage</span>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold">92%</span>
+<span class="text-xs text-tertiary font-bold">+4% vs avg</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary flex flex-col justify-between h-32">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Total Checked-In</span>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold">342</span>
+<span class="text-xs text-slate-500 font-bold">/ 380 total</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-yellow-500 flex flex-col justify-between h-32">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Late Arrivals</span>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold">12</span>
+<span class="text-xs text-error font-bold">Critical</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-error flex flex-col justify-between h-32">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Flagged Events</span>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold">03</span>
+<span class="text-xs text-slate-500 font-bold">Active investigation</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression: Contextually not needed here as per requirements but noted -->
+
+<!-- API Integration Scripts -->
+<script src="../js/api-client.js"></script>
+<script src="../js/router.js"></script>
+<script src="../js/utils.js"></script>
+<script src="attendance.js"></script>
+</body></html>

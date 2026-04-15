@@ -1,0 +1,6 @@
+employeeId,employeeName,department,timestamp,status,sessionId
+EMP-2026-007,Dinesh V A,Sorting,2026-04-14 23:41:14,Present,38124559-eb91-4c3d-9b61-7f8abed0fe3c
+EMP-2026-010,jahi,Sorting,2026-04-15 14:19:09,Present,47c2c8a2-f7db-4983-9372-523860b54d48
+EMP-2026-010,jahi,Sorting,2026-04-15 14:19:20,Present,ecb74a1c-f6d8-474f-9af9-059536d7b30a
+EMP-2026-007,Dinesh V A,Sorting,2026-04-15 14:47:55,Present,62ad27e1-17b2-418c-897d-cff5ded785ee
+EMP-2026-007,Dinesh V A,Sorting,2026-04-15 14:49:26,Present,b35362f8-f478-4bc8-8f61-9ffc28ad4d1d

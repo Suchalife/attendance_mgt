@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Industrial Intelligence - Operations Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#d8e3f5",
+                        "background": "#f6fafd",
+                        "tertiary-container": "#00855b",
+                        "surface-tint": "#005ac2",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dfe3e6",
+                        "outline-variant": "#c2c6d6",
+                        "on-secondary-container": "#5a6574",
+                        "primary-fixed": "#d8e2ff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "tertiary": "#006947",
+                        "on-background": "#171c1f",
+                        "secondary": "#545f6e",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-fixed": "#111c29",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-error": "#ffffff",
+                        "primary": "#0058be",
+                        "inverse-surface": "#2c3134",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#424754",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#001a42",
+                        "surface-container-low": "#f0f4f7",
+                        "surface-container-highest": "#dfe3e6",
+                        "surface": "#f6fafd",
+                        "inverse-primary": "#adc6ff",
+                        "surface-container-high": "#e5e9ec",
+                        "on-tertiary-fixed": "#002113",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#2170e4",
+                        "on-primary-container": "#fefcff",
+                        "surface-container": "#eaeef1",
+                        "on-error-container": "#93000a",
+                        "outline": "#727785",
+                        "inverse-on-surface": "#edf1f4",
+                        "secondary-fixed": "#d8e3f5",
+                        "on-surface": "#171c1f",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d6dbdd",
+                        "surface-bright": "#f6fafd",
+                        "on-secondary-fixed-variant": "#3d4856",
+                        "on-tertiary-container": "#f5fff6",
+                        "on-primary-fixed-variant": "#004395",
+                        "secondary-fixed-dim": "#bcc7d8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar Component -->
+<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto flex flex-col py-6 shadow-xl z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
+<p class="text-xs text-slate-400 font-['Inter'] tracking-tight">Recycling Ops</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active: Dashboard -->
+<a class="nav-item bg-[#0058be] text-white rounded-md mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm scale-95 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                Dashboard
+            </a>
+<a class="nav-item text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">person_add</span>
+                Employee Registration
+            </a>
+<a class="nav-item text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">fingerprint</span>
+                Biometric Enrollment
+            </a>
+<a class="nav-item text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">event_available</span>
+                Attendance
+            </a>
+<a class="nav-item text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span>
+                Reports
+            </a>
+</nav>
+<div class="mt-auto space-y-1 border-t border-slate-700 pt-4">
+<a class="text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+                Settings
+            </a>
+<a class="text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">help_outline</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- TopAppBar Component -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-[#f0f4f7] flex items-center justify-between px-8 w-full z-40 border-none">
+<div class="flex items-center space-x-6">
+<h2 class="font-['Inter'] font-bold text-sm tracking-wide text-[#0058be] uppercase">Operations Dashboard</h2>
+<div class="flex space-x-4">
+<span class="text-[#0058be] border-b-2 border-[#0058be] pb-1 font-['Inter'] font-bold text-sm tracking-wide cursor-pointer">CHN-01</span>
+<span class="text-slate-500 hover:text-[#0058be] transition-opacity font-['Inter'] font-bold text-sm tracking-wide cursor-pointer">BLR-02</span>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="material-symbols-outlined text-slate-500 hover:text-[#0058be] transition-opacity cursor-pointer active:opacity-70">notifications</button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-['Inter'] font-bold text-xs tracking-wider uppercase flex items-center space-x-2 active:scale-95 transition-transform">
+<span>Shift Report</span>
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 pt-20 p-8 space-y-8">
+<!-- KPI Row -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Total Employees -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-primary">
+<span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Total Employees</span>
+<div class="flex items-end justify-between mt-2">
+<span class="text-3xl font-extrabold text-on-surface tracking-tighter">1,284</span>
+<span class="material-symbols-outlined text-primary-fixed-variant bg-primary-fixed p-1.5 rounded-lg text-lg">groups</span>
+</div>
+</div>
+<!-- Present Today -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary">
+<span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Present Today</span>
+<div class="flex items-end justify-between mt-2">
+<span class="text-3xl font-extrabold text-on-surface tracking-tighter">1,156</span>
+<span class="text-xs font-bold text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded-sm">+2.4%</span>
+</div>
+</div>
+<!-- Absent Today -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-error">
+<span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Absent Today</span>
+<div class="flex items-end justify-between mt-2">
+<span class="text-3xl font-extrabold text-on-surface tracking-tighter">128</span>
+<span class="material-symbols-outlined text-error text-lg">event_busy</span>
+</div>
+</div>
+<!-- Avg Attendance % -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-primary-container">
+<span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Avg Attendance %</span>
+<div class="flex items-end justify-between mt-2">
+<span class="text-3xl font-extrabold text-on-surface tracking-tighter">90.1%</span>
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="w-[90%] h-full bg-primary-container"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Left & Center Col (Charts and Feed) -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Attendance Trend Chart Placeholder -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-bold text-on-surface tracking-tight">Attendance Trend</h3>
+<select class="bg-surface-container-low border-none text-xs font-bold text-on-surface-variant rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-primary">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<!-- Mock Chart Visualization -->
+<div class="relative h-64 w-full flex items-end justify-between px-2"><!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="border-t border-outline-variant w-full h-px"></div>
+<div class="border-t border-outline-variant w-full h-px"></div>
+<div class="border-t border-outline-variant w-full h-px"></div>
+<div class="border-t border-outline-variant w-full h-px"></div>
+</div>
+<!-- Bars with numerical labels -->
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-on-surface-variant mb-1">942</span>
+<div class="w-8 bg-surface-container-high rounded-t-sm h-[70%] group-hover:bg-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Mon</span>
+</div>
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-on-surface-variant mb-1">1105</span>
+<div class="w-8 bg-surface-container-high rounded-t-sm h-[85%] group-hover:bg-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Tue</span>
+</div>
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-on-surface-variant mb-1">1080</span>
+<div class="w-8 bg-surface-container-high rounded-t-sm h-[82%] group-hover:bg-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Wed</span>
+</div>
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-on-surface-variant mb-1">1180</span>
+<div class="w-8 bg-surface-container-high rounded-t-sm h-[90%] group-hover:bg-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Thu</span>
+</div>
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-primary mb-1">1204</span>
+<div class="w-8 bg-primary rounded-t-sm h-[92%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Fri</span>
+</div>
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-on-surface-variant mb-1">520</span>
+<div class="w-8 bg-surface-container-high rounded-t-sm h-[40%] group-hover:bg-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Sat</span>
+</div>
+<div class="flex flex-col items-center group w-full h-full justify-end">
+<span class="text-[9px] font-bold text-on-surface-variant mb-1">480</span>
+<div class="w-8 bg-surface-container-high rounded-t-sm h-[35%] group-hover:bg-primary transition-colors"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Sun</span>
+</div></div>
+</div>
+<!-- Gate 04 Camera Feed -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center space-x-3">
+<h3 class="text-lg font-bold text-on-surface tracking-tight">Gate 04 Live Feed</h3>
+<div class="flex items-center space-x-1.5 px-2 py-0.5 bg-error-container text-error rounded-sm text-[10px] font-black tracking-widest animate-pulse">
+<span class="w-1.5 h-1.5 bg-error rounded-full"></span>
+<span>LIVE</span>
+</div>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">14:24:08.02</span>
+</div>
+<div class="relative w-full aspect-video bg-inverse-surface rounded-lg overflow-hidden group">
+<img alt="Industrial gate security camera feed" class="w-full h-full object-cover opacity-80" data-alt="CCTV security camera view of an industrial recycling facility gate with concrete floor and metal turnstile under bright fluorescent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVNHnCES2tCt6IhH8qODQtf2kVDscKuKLBEPM8ovKU0KdiNstQ6Q5Lzn7inq5V0bWPyJyCklXmQIIoEVwY-n9ZBjro6M_hh7Y0rfB-hLDApsq5dXMo0PM8PyfodaPTQsJ73aaUnxbu4p-CQPjgFd6-lgRIx8ILtrQNRh8GCh6PKoTwRFY9iISadz-9EV8LuJ44nMZymajni4ZEykHzyQRGLSvUmd0nq8HMoi1U3rWL5fFTrMpqTKIxFZkplKGsVkOs43xb5F7luvme"/>
+<!-- Facial Detection Mockup -->
+<div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-primary w-24 h-24 rounded-sm flex flex-col justify-start items-start">
+<div class="bg-primary text-white text-[8px] px-1 font-mono uppercase">ID: EMP-9421</div>
+<div class="mt-auto bg-primary/20 w-full h-2"></div>
+</div>
+<div class="absolute bottom-4 left-4 flex space-x-2">
+<button class="bg-on-surface/20 backdrop-blur-md p-2 rounded-lg hover:bg-on-surface/40 transition-colors">
+<span class="material-symbols-outlined text-white text-sm">fullscreen</span>
+</button>
+<button class="bg-on-surface/20 backdrop-blur-md p-2 rounded-lg hover:bg-on-surface/40 transition-colors">
+<span class="material-symbols-outlined text-white text-sm">screenshot</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Col (Activity List) -->
+<div class="space-y-8">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden h-full">
+<div class="p-6 pb-4 border-b border-surface-container">
+<h3 class="text-lg font-bold text-on-surface tracking-tight">Recent Activity</h3>
+<p class="text-xs text-on-surface-variant mt-1">Last updated 2 minutes ago</p>
+</div>
+<div class="divide-y divide-surface-container-low">
+<!-- Entry 1 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="text-xs font-bold text-on-surface">Marcus Chen</span>
+<span class="text-[10px] font-mono text-on-surface-variant">14:12</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] font-mono text-on-surface-variant">EMP-8821</span>
+<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
+</div>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="text-xs font-bold text-on-surface">Elena Rodriguez</span>
+<span class="text-[10px] font-mono text-on-surface-variant">14:09</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] font-mono text-on-surface-variant">EMP-9033</span>
+<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
+</div>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="text-xs font-bold text-on-surface">Samuel Okoro</span>
+<span class="text-[10px] font-mono text-on-surface-variant">14:05</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] font-mono text-on-surface-variant">EMP-7712</span>
+<span class="px-1.5 py-0.5 bg-error-container/20 text-error text-[9px] font-bold rounded-sm uppercase tracking-wide">Out-Time</span>
+</div>
+</div>
+</div>
+<!-- Entry 4 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="text-xs font-bold text-on-surface">Linh Pham</span>
+<span class="text-[10px] font-mono text-on-surface-variant">13:58</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] font-mono text-on-surface-variant">EMP-1029</span>
+<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
+</div>
+</div>
+</div>
+<!-- Entry 5 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="text-xs font-bold text-on-surface">David Miller</span>
+<span class="text-[10px] font-mono text-on-surface-variant">13:55</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] font-mono text-on-surface-variant">EMP-9421</span>
+<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
+</div>
+</div>
+</div>
+<!-- Entry 6 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="text-xs font-bold text-on-surface">Sarah Connor</span>
+<span class="text-[10px] font-mono text-on-surface-variant">13:48</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] font-mono text-on-surface-variant">EMP-3044</span>
+<span class="px-1.5 py-0.5 bg-error-container/20 text-error text-[9px] font-bold rounded-sm uppercase tracking-wide">Out-Time</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 text-center">
+<button class="text-xs font-bold text-primary hover:underline uppercase tracking-widest">View All Logs</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- API Integration Scripts -->
+<script src="../js/api-client.js"></script>
+<script src="../js/router.js"></script>
+<script src="../js/utils.js"></script>
+<script src="dashboard.js"></script>
+</body></html>

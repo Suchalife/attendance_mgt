@@ -1,7 +1,15 @@
+deepface
+flask
+flask-bcrypt
+flask-cors
+mtcnn
 numpy
 opencv-contrib-python
 opencv-python
 openpyxl
 pandas
 pillow
-pyttsx3
+pymongo
+python-dotenv
+scipy
+tensorflow

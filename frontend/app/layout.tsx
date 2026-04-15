@@ -2,24 +2,25 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Face Recognition System",
-  description: "Full-stack Flask + Next.js Face Recognition App",
+  title: "Industrial Intelligence — Employee AMS",
+  description: "Face-recognition powered attendance management for industrial workforce operations.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-gray-900 text-gray-100 min-h-screen">
+    <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body style={{ fontFamily: "'Inter', sans-serif", background: "#f6fafd", margin: 0 }}>
         {children}
-        
-        {/* Footer */}
-        <footer className="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
-          &copy; {new Date().getFullYear()} Face Recognition System. All rights reserved.
-        </footer>
       </body>
     </html>
   );

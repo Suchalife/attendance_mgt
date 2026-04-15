@@ -1,5 +1,8 @@
 {
-  "/page": "app/page.js",
-  "/signin/page": "app/signin/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/employee/registrationform/page": "app/employee/registrationform/page.js",
+  "/employee/biometric/page": "app/employee/biometric/page.js",
+  "/manager/start-session/page": "app/manager/start-session/page.js",
+  "/employee/view-attendance/page": "app/employee/view-attendance/page.js",
+  "/manager/dashboard/page": "app/manager/dashboard/page.js"
 }

@@ -1,3 +1,4 @@
+import os
 import cv2
 from mtcnn import MTCNN
 from deepface import DeepFace
@@ -5,15 +6,24 @@ from pymongo import MongoClient
 from scipy.spatial.distance import cosine
 import numpy as np
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ----------------- MongoDB Setup -----------------
-MONGODB_URI = "mongodb+srv://Kamlesh-21:Guru2004@attendencesystem.nlapsic.mongodb.net/Attendencesystem?retryWrites=true&w=majority&appName=Attendencesystem"
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGODB_URI)
-db = client['facerecognition_db']
-collection = db['users']
+db = client['ecorecycle_ams_db']
+collection = db['employees']
+
+DEPARTMENTS = [
+    "Sorting", "Shredding", "Processing",
+    "Packaging", "Logistics", "Quality Control", "Administration"
+]
 
 # ----------------- Face Detector -----------------
 detector = MTCNN()
+
 
 # ----------------- Detect Faces -----------------
 def detect_faces(image):
@@ -27,6 +37,7 @@ def detect_faces(image):
         face_data.append({'box': (x, y, w, h), 'face': face_img})
     return face_data
 
+
 # ----------------- Extract Embedding -----------------
 def extract_embedding(face_img):
     try:
@@ -36,16 +47,17 @@ def extract_embedding(face_img):
         print("Error extracting embedding:", e)
         return None
 
-# ----------------- Automatic Registration -----------------
-def auto_register_user(user_id, name, wait_time=5):
+
+# ----------------- Register Employee -----------------
+def register_employee(employee_id, employee_name, department, shift="Morning", wait_time=5):
     """
-    Automatically captures a face from webcam and registers user.
+    Automatically captures a face from webcam and registers the employee.
     wait_time: Seconds to wait before registering (to stabilize face).
     """
     cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-    print(f"Looking for {name}'s face. Please look at the camera for {wait_time} seconds...")
+    print(f"Looking for {employee_name}'s face. Please look at the camera for {wait_time} seconds...")
 
     start_time = time.time()
     registered = False
@@ -60,25 +72,28 @@ def auto_register_user(user_id, name, wait_time=5):
         if len(faces) == 1:
             x, y, w, h = faces[0]['box']
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            cv2.putText(frame, "Face detected", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            cv2.putText(frame, "Face detected", (x, y-10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
             if time.time() - start_time > wait_time:
                 embedding = extract_embedding(faces[0]['face'])
                 if embedding is not None:
-                    user_data = {
-                        'user_id': user_id,
-                        'name': name,
+                    employee_data = {
+                        'employee_id': employee_id,
+                        'employee_name': employee_name,
+                        'department': department,
+                        'shift': shift,
                         'embedding': embedding.tolist() if isinstance(embedding, np.ndarray) else embedding
                     }
-                    collection.insert_one(user_data)
-                    print(f"User {name} registered successfully.")
+                    collection.insert_one(employee_data)
+                    print(f"Employee {employee_name} registered successfully in {department} department.")
                     registered = True
                     break
         else:
-            cv2.putText(frame, f"{len(faces)} faces detected. Show only one face.", (50,50),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 2)
+            cv2.putText(frame, f"{len(faces)} faces detected. Show only one face.", (50, 50),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
             start_time = time.time()  # Reset timer if face not stable
 
-        cv2.imshow("Automatic Registration", frame)
+        cv2.imshow("EcoRecycle - Employee Registration", frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
@@ -88,11 +103,12 @@ def auto_register_user(user_id, name, wait_time=5):
     if not registered:
         print("Registration failed. Please try again.")
 
+
 # ----------------- Live Recognition -----------------
 def live_recognition():
-    users = list(collection.find())
-    if not users:
-        print("No users registered.")
+    employees = list(collection.find())
+    if not employees:
+        print("No employees registered.")
         return
 
     threshold = 0.7  # Cosine similarity threshold
@@ -120,24 +136,27 @@ def live_recognition():
             best_match = None
             min_distance = float('inf')
 
-            for user in users:
-                stored_embedding = user['embedding']
+            for employee in employees:
+                stored_embedding = employee['embedding']
                 distance = cosine(embedding, stored_embedding)
                 if distance < min_distance:
                     min_distance = distance
-                    best_match = user
+                    best_match = employee
 
             if min_distance < threshold:
-                name_text = f"{best_match['name']} ({min_distance:.2f})"
-                color = (0, 255, 0)  # Green for known
+                emp_name = best_match.get('employee_name', 'Unknown')
+                emp_dept = best_match.get('department', '')
+                display_text = f"{emp_name} | {emp_dept} ({min_distance:.2f})"
+                color = (0, 255, 0)  # Green for recognized
             else:
-                name_text = "Unknown"
-                color = (0, 0, 255)  # Red for unknown
+                display_text = "Unknown Employee"
+                color = (0, 0, 255)  # Red for unrecognized
 
             cv2.rectangle(frame, (x, y), (x+w, y+h), color, 2)
-            cv2.putText(frame, name_text, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
+            cv2.putText(frame, display_text, (x, y-10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
 
-        cv2.imshow("Live Recognition", frame)
+        cv2.imshow("EcoRecycle - Live Employee Recognition", frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
@@ -145,25 +164,30 @@ def live_recognition():
     cap.release()
     cv2.destroyAllWindows()
 
+
 # ----------------- Main Menu -----------------
 def main():
     while True:
-        print("\nFace Recognition System")
-        print("1. Automatic Register User")
+        print("\n=== EcoRecycle Employee Face Recognition System ===")
+        print("1. Register Employee")
         print("2. Start Live Recognition")
         print("3. Exit")
         choice = input("Enter your choice: ")
 
         if choice == '1':
-            user_id = input("Enter user ID: ")
-            name = input("Enter user name: ")
-            auto_register_user(user_id, name)
+            employee_id = input("Enter Employee ID: ")
+            employee_name = input("Enter Employee Name: ")
+            print("Available Departments:", ", ".join(DEPARTMENTS))
+            department = input("Enter Department: ")
+            shift = input("Enter Shift (Morning/Evening/Night): ")
+            register_employee(employee_id, employee_name, department, shift)
         elif choice == '2':
             live_recognition()
         elif choice == '3':
             break
         else:
             print("Invalid choice. Try again.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del \"C:\\\\Users\\\\DINESH VA\\\\Desktop\\\\Attendance-Management-system-using-face-recognition\\\\frontend\\\\app\\\\signin\\\\page.tsx\")",
+      "Bash(del \"C:\\\\Users\\\\DINESH VA\\\\Desktop\\\\Attendance-Management-system-using-face-recognition\\\\frontend\\\\app\\\\signup\\\\page.tsx\")",
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(netstat -ano)",
+      "Bash(awk '{print $5}')",
+      "Bash(xargs -I {} taskkill /F /PID {})",
+      "Bash(taskkill /F /PID 21784)",
+      "Bash(cmd.exe /c \"taskkill /F /PID 21784\")",
+      "Bash(cmd.exe /c \"tasklist /FI \\\\\"PID eq 21784\\\\\"\")"
+    ]
+  }
+}

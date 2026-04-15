@@ -35,7 +35,7 @@ export default function Footer() {
     product: [
       { name: "Features", href: "#features" },
       { name: "Pricing", href: "#pricing" },
-      { name: "Demo", href: "/student/demo-session" },
+      { name: "Demo", href: "/employee/demo-session" },
       { name: "API Documentation", href: "#" },
       { name: "Security", href: "#" },
       { name: "Integrations", href: "#" }
