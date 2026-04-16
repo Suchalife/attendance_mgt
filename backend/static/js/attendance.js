@@ -181,23 +181,43 @@
                 currentSessionId = response.session_id;
             }
 
-            // If face detected and employee recognized
+            // Update bounding box overlays based on detection result
+            const overlayRecognized = document.getElementById('overlay-recognized');
+            const overlayUnknown = document.getElementById('overlay-unknown');
+            const overlayLabel = document.getElementById('overlay-recognized-label');
+
             if (response.face_detected && response.employee_recognized && response.employee) {
                 console.log('Employee recognized:', response.employee);
-                
+
+                // Show ONLY green box
+                if (overlayRecognized) {
+                    if (overlayLabel) {
+                        overlayLabel.textContent = 'ID: ' + response.employee.employeeId + ' [RECOGNIZED]';
+                    }
+                    overlayRecognized.style.display = '';
+                }
+                if (overlayUnknown) overlayUnknown.style.display = 'none';
+
                 // Add to recognized employees list
                 addRecognizedEmployee(response.employee, response.attendance);
-                
+
                 // Update stats
                 updateStats();
-                
+
                 // Show notification for recognition
                 Utils.showNotification(`${response.employee.employeeName} marked present`, 'success');
             } else if (response.face_detected && !response.employee_recognized) {
                 console.log('Face detected but employee not recognized');
-                // Could add unknown person to list or show warning
+
+                // Show ONLY red box
+                if (overlayUnknown) overlayUnknown.style.display = '';
+                if (overlayRecognized) overlayRecognized.style.display = 'none';
             } else {
                 console.log('No face detected in current frame');
+
+                // Hide both boxes when no face detected
+                if (overlayRecognized) overlayRecognized.style.display = 'none';
+                if (overlayUnknown) overlayUnknown.style.display = 'none';
             }
 
         } catch (error) {

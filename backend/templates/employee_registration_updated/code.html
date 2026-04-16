@@ -84,45 +84,7 @@
     </style>
 </head>
 <body class="bg-background text-on-surface">
-<!-- SideNavBar -->
-<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50">
-<div class="px-6 mb-8">
-<h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
-<p class="text-xs text-slate-400 mt-1">Recycling Ops</p>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/dashboard">
-<span class="material-symbols-outlined mr-3">dashboard</span>
-                Dashboard
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/registration">
-<span class="material-symbols-outlined mr-3">person_add</span>
-                Employee Registration
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/enrollment">
-<span class="material-symbols-outlined mr-3">fingerprint</span>
-                Biometric Enrollment
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/attendance">
-<span class="material-symbols-outlined mr-3">event_available</span>
-                Attendance
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/reports">
-<span class="material-symbols-outlined mr-3">analytics</span>
-                Reports
-            </a>
-</nav>
-<div class="mt-auto space-y-1">
-<a class="flex items-center px-4 py-3 text-slate-400 hover:text-white mx-2 font-medium tracking-tight text-sm hover:bg-[#171c1f] transition-colors duration-200" href="#">
-<span class="material-symbols-outlined mr-3">settings</span>
-                Settings
-            </a>
-<a class="flex items-center px-4 py-3 text-slate-400 hover:text-white mx-2 font-medium tracking-tight text-sm hover:bg-[#171c1f] transition-colors duration-200" href="#">
-<span class="material-symbols-outlined mr-3">help_outline</span>
-                Support
-            </a>
-</div>
-</aside>
+{% include 'partials/sidebar.html' %}
 <!-- TopAppBar -->
 <header class="fixed top-0 right-0 left-64 h-16 bg-[#f6fafd] flex items-center justify-between px-8 w-full z-40 bg-[#f0f4f7] border-none">
 <div class="flex items-center space-x-6">
@@ -133,10 +95,6 @@
 </div>
 </div>
 <div class="flex items-center space-x-4">
-<button class="material-symbols-outlined text-slate-500 hover:text-[#0058be] transition-opacity">notifications</button>
-<button class="bg-[#0058be] text-white px-4 py-1.5 rounded-md font-bold text-sm tracking-wide active:opacity-70 transition-all">
-                Shift Report
-            </button>
 </div>
 </header>
 <!-- Main Content Canvas -->

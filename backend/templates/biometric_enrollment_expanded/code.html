@@ -97,46 +97,7 @@
     </style>
 </head>
 <body class="bg-background text-on-surface font-body overflow-y-auto">
-<!-- SideNavBar Shell -->
-<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50">
-<div class="px-6 mb-8">
-<h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
-<p class="text-slate-400 text-xs font-medium tracking-tight">Recycling Ops</p>
-</div>
-<nav class="flex-grow space-y-1">
-<a href="/dashboard" class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-3 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm scale-95 active:scale-90">
-<span class="material-symbols-outlined mr-3">dashboard</span>
-                Dashboard
-            </a>
-<a href="/registration" class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-3 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm scale-95 active:scale-90">
-<span class="material-symbols-outlined mr-3">person_add</span>
-                Employee Registration
-            </a>
-<!-- Active State: Biometric Enrollment -->
-<a href="/enrollment" class="nav-item bg-[#0058be] text-white rounded-md mx-2 flex items-center px-4 py-3 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm scale-95 active:scale-90">
-<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
-                Biometric Enrollment
-            </a>
-<a href="/attendance" class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-3 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm scale-95 active:scale-90">
-<span class="material-symbols-outlined mr-3">event_available</span>
-                Attendance
-            </a>
-<a href="/reports" class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-3 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm scale-95 active:scale-90">
-<span class="material-symbols-outlined mr-3">analytics</span>
-                Reports
-            </a>
-</nav>
-<div class="mt-auto border-t border-slate-700/50 pt-4 space-y-1">
-<div class="text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm">
-<span class="material-symbols-outlined mr-3">settings</span>
-                Settings
-            </div>
-<div class="text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 cursor-pointer transition-colors duration-200 font-medium tracking-tight text-sm">
-<span class="material-symbols-outlined mr-3">help_outline</span>
-                Support
-            </div>
-</div>
-</aside>
+{% include 'partials/sidebar.html' %}
 <!-- Main Content Area -->
 <main class="ml-64 min-h-screen flex flex-col">
 <!-- TopAppBar -->
@@ -150,10 +111,6 @@
 </div>
 </div>
 <div class="flex items-center space-x-4">
-<span class="material-symbols-outlined text-slate-500 cursor-pointer active:opacity-70">notifications</span>
-<button class="bg-primary px-4 py-1.5 rounded-lg text-white font-bold text-sm tracking-wide hover:opacity-90 active:opacity-70 transition-opacity">
-                    Shift Report
-                </button>
 </div>
 </header>
 <!-- Canvas Body -->
@@ -164,7 +121,7 @@
 <div class="space-y-2">
 <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Select Employee</label>
 <div class="relative group">
-<select class="w-full bg-surface-container-low border-none rounded-lg py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+<select class="w-full bg-surface-container-low border-none rounded-lg py-3 px-4 pr-10 text-on-surface focus:ring-2 focus:ring-primary appearance-none cursor-pointer" style="background-image: none;">
 <option>EMP-2048: Rajesh Kumar (Sorters Div)</option>
 <option>EMP-2049: Anita Sharma (Logistics)</option>
 <option>EMP-2050: Vikram Singh (Hazardous Waste)</option>

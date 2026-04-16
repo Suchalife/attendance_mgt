@@ -1,0 +1,35 @@
+<!-- Shared SideNavBar Component -->
+<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto flex flex-col py-6 shadow-xl z-50">
+    <div class="px-6 mb-8">
+        <h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
+        <p class="text-xs text-slate-400 font-medium tracking-tight">Recycling Ops</p>
+    </div>
+    <nav class="flex-1 space-y-1">
+        <a class="nav-item mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md {% if active_page == 'dashboard' %}bg-[#0058be] text-white{% else %}text-slate-400 hover:text-white hover:bg-[#171c1f]{% endif %}" href="/dashboard">
+            <span class="material-symbols-outlined mr-3" {% if active_page == 'dashboard' %}style="font-variation-settings: 'FILL' 1;"{% endif %}>dashboard</span>
+            Dashboard
+        </a>
+        <a class="nav-item mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md {% if active_page == 'registration' %}bg-[#0058be] text-white{% else %}text-slate-400 hover:text-white hover:bg-[#171c1f]{% endif %}" href="/registration">
+            <span class="material-symbols-outlined mr-3" {% if active_page == 'registration' %}style="font-variation-settings: 'FILL' 1;"{% endif %}>person_add</span>
+            Employee Registration
+        </a>
+        <a class="nav-item mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md {% if active_page == 'enrollment' %}bg-[#0058be] text-white{% else %}text-slate-400 hover:text-white hover:bg-[#171c1f]{% endif %}" href="/enrollment">
+            <span class="material-symbols-outlined mr-3" {% if active_page == 'enrollment' %}style="font-variation-settings: 'FILL' 1;"{% endif %}>fingerprint</span>
+            Biometric Enrollment
+        </a>
+        <a class="nav-item mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md {% if active_page == 'attendance' %}bg-[#0058be] text-white{% else %}text-slate-400 hover:text-white hover:bg-[#171c1f]{% endif %}" href="/attendance">
+            <span class="material-symbols-outlined mr-3" {% if active_page == 'attendance' %}style="font-variation-settings: 'FILL' 1;"{% endif %}>event_available</span>
+            Attendance
+        </a>
+        <a class="nav-item mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md {% if active_page == 'reports' %}bg-[#0058be] text-white{% else %}text-slate-400 hover:text-white hover:bg-[#171c1f]{% endif %}" href="/reports">
+            <span class="material-symbols-outlined mr-3" {% if active_page == 'reports' %}style="font-variation-settings: 'FILL' 1;"{% endif %}>analytics</span>
+            Reports
+        </a>
+    </nav>
+    <div class="mt-auto space-y-1 border-t border-slate-700/50 pt-4">
+        <a class="text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-2 font-medium tracking-tight text-sm transition-colors duration-200 rounded-md" href="#">
+            <span class="material-symbols-outlined mr-3">help_outline</span>
+            Support
+        </a>
+    </div>
+</aside>

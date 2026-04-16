@@ -86,45 +86,7 @@
     </style>
 </head>
 <body class="bg-background text-on-surface selection:bg-primary-fixed">
-<!-- SideNavBar -->
-<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto flex flex-col py-6 shadow-xl z-50">
-<div class="px-6 mb-10">
-<h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
-<p class="text-slate-400 text-xs font-medium tracking-tight">Recycling Ops</p>
-</div>
-<nav class="flex-1 px-4 space-y-1">
-<a class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white mx-2 hover:bg-[#171c1f] transition-colors duration-200 rounded-md" href="/dashboard">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="font-medium tracking-tight text-sm">Dashboard</span>
-</a>
-<a class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white mx-2 hover:bg-[#171c1f] transition-colors duration-200 rounded-md" href="/registration">
-<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
-<span class="font-medium tracking-tight text-sm">Employee Registration</span>
-</a>
-<a class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white mx-2 hover:bg-[#171c1f] transition-colors duration-200 rounded-md" href="/enrollment">
-<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
-<span class="font-medium tracking-tight text-sm">Biometric Enrollment</span>
-</a>
-<a class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white mx-2 hover:bg-[#171c1f] transition-colors duration-200 rounded-md" href="/attendance">
-<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
-<span class="font-medium tracking-tight text-sm">Attendance</span>
-</a>
-<a class="nav-item flex items-center gap-3 px-4 py-3 bg-[#0058be] text-white rounded-md mx-2 scale-95 active:scale-90 transition-transform" href="/reports">
-<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
-<span class="font-medium tracking-tight text-sm">Reports</span>
-</a>
-</nav>
-<div class="px-4 mt-auto border-t border-slate-700/50 pt-6 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white mx-2 hover:bg-[#171c1f] transition-colors duration-200 rounded-md" href="#">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="font-medium tracking-tight text-sm">Settings</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white mx-2 hover:bg-[#171c1f] transition-colors duration-200 rounded-md" href="#">
-<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-<span class="font-medium tracking-tight text-sm">Support</span>
-</a>
-</div>
-</aside>
+{% include 'partials/sidebar.html' %}
 <!-- TopAppBar -->
 <header class="fixed top-0 right-0 left-64 h-16 bg-[#f0f4f7] border-none flex items-center justify-between px-8 w-full z-40">
 <div class="flex items-center gap-6">
@@ -135,15 +97,6 @@
 </nav>
 </div>
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-slate-500 hover:text-[#0058be] transition-colors" data-icon="notifications">notifications</button>
-<button class="bg-primary text-on-primary px-4 py-2 rounded font-bold text-xs tracking-wide uppercase active:opacity-70 transition-all flex items-center gap-2">
-                Shift Report
-            </button>
-<div class="flex items-center gap-2 ml-2">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden">
-<img alt="User Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a site manager in a corporate office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXPLHYVh7fBidIQooyQarvpfpx8tFdHF9Rz82J2r95G8q869ULJsMdrzZCbP9ObNxYssXF5SGLP0U8pNOaYy5Keld5vaDpWoNWIAp3fzkyFKvCmLM6aZdaa_0jovxoEziO0raIl4cr7ucx736HQCa2nYPJVArqvqAinL-n31kPR6_PXDcYeAc8_jGaSiGmJEp_kgrXq422k6cW8zo2mBxLTOqIpBXC5rLAUQ1gl40Bd51hdKR6MHNkInRYDqCv5GlIO4-jDjINfT92"/>
-</div>
-</div>
 </div>
 </header>
 <!-- Main Content -->
@@ -311,11 +264,11 @@
 </div>
 <div class="px-6 py-4 bg-surface-container-lowest flex justify-between items-center border-t border-surface-container-high">
 <div class="flex gap-2">
-<button class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<button onclick="window.location.href='/download/csv'" class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-surface-container-high transition-colors flex items-center gap-2">
 <span class="material-symbols-outlined text-sm" data-icon="description">description</span>
                                 Export CSV
                             </button>
-<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-2">
+<button onclick="window.location.href='/download/pdf'" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-2">
 <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
                                 Download PDF
                             </button>

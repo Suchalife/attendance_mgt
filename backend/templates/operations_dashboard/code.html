@@ -87,46 +87,7 @@
     </style>
 </head>
 <body class="bg-background text-on-surface">
-<!-- SideNavBar Component -->
-<aside class="bg-[#1f2a37] h-screen w-64 fixed left-0 top-0 overflow-y-auto flex flex-col py-6 shadow-xl z-50">
-<div class="px-6 mb-8">
-<h1 class="text-lg font-bold text-white tracking-widest uppercase">Industrial Intelligence</h1>
-<p class="text-xs text-slate-400 font-['Inter'] tracking-tight">Recycling Ops</p>
-</div>
-<nav class="flex-1 space-y-1">
-<!-- Active: Dashboard -->
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/dashboard">
-<span class="material-symbols-outlined mr-3">dashboard</span>
-                Dashboard
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/registration">
-<span class="material-symbols-outlined mr-3">person_add</span>
-                Employee Registration
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/enrollment">
-<span class="material-symbols-outlined mr-3">fingerprint</span>
-                Biometric Enrollment
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/attendance">
-<span class="material-symbols-outlined mr-3">event_available</span>
-                Attendance
-            </a>
-<a class="nav-item text-slate-400 hover:text-white mx-2 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md" href="/reports">
-<span class="material-symbols-outlined mr-3">analytics</span>
-                Reports
-            </a>
-</nav>
-<div class="mt-auto space-y-1 border-t border-slate-700 pt-4">
-<a class="text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
-<span class="material-symbols-outlined mr-3">settings</span>
-                Settings
-            </a>
-<a class="text-slate-400 hover:text-white hover:bg-[#171c1f] mx-2 flex items-center px-4 py-3 font-['Inter'] font-medium tracking-tight text-sm transition-colors duration-200" href="#">
-<span class="material-symbols-outlined mr-3">help_outline</span>
-                Support
-            </a>
-</div>
-</aside>
+{% include 'partials/sidebar.html' %}
 <!-- TopAppBar Component -->
 <header class="fixed top-0 right-0 left-64 h-16 bg-[#f0f4f7] flex items-center justify-between px-8 w-full z-40 border-none">
 <div class="flex items-center space-x-6">
@@ -137,11 +98,6 @@
 </div>
 </div>
 <div class="flex items-center space-x-4">
-<button class="material-symbols-outlined text-slate-500 hover:text-[#0058be] transition-opacity cursor-pointer active:opacity-70">notifications</button>
-<button class="bg-primary text-white px-4 py-2 rounded-lg font-['Inter'] font-bold text-xs tracking-wider uppercase flex items-center space-x-2 active:scale-95 transition-transform">
-<span>Shift Report</span>
-<span class="material-symbols-outlined text-sm">download</span>
-</button>
 </div>
 </header>
 <!-- Main Canvas -->
@@ -152,7 +108,7 @@
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-primary">
 <span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Total Employees</span>
 <div class="flex items-end justify-between mt-2">
-<span class="text-3xl font-extrabold text-on-surface tracking-tighter">1,284</span>
+<span id="kpi-total-employees" class="text-3xl font-extrabold text-on-surface tracking-tighter">--</span>
 <span class="material-symbols-outlined text-primary-fixed-variant bg-primary-fixed p-1.5 rounded-lg text-lg">groups</span>
 </div>
 </div>
@@ -160,15 +116,15 @@
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary">
 <span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Present Today</span>
 <div class="flex items-end justify-between mt-2">
-<span class="text-3xl font-extrabold text-on-surface tracking-tighter">1,156</span>
-<span class="text-xs font-bold text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded-sm">+2.4%</span>
+<span id="kpi-present-today" class="text-3xl font-extrabold text-on-surface tracking-tighter">--</span>
+<span class="material-symbols-outlined text-tertiary text-lg">event_available</span>
 </div>
 </div>
 <!-- Absent Today -->
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-error">
 <span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Absent Today</span>
 <div class="flex items-end justify-between mt-2">
-<span class="text-3xl font-extrabold text-on-surface tracking-tighter">128</span>
+<span id="kpi-absent-today" class="text-3xl font-extrabold text-on-surface tracking-tighter">--</span>
 <span class="material-symbols-outlined text-error text-lg">event_busy</span>
 </div>
 </div>
@@ -176,9 +132,9 @@
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-primary-container">
 <span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Avg Attendance %</span>
 <div class="flex items-end justify-between mt-2">
-<span class="text-3xl font-extrabold text-on-surface tracking-tighter">90.1%</span>
+<span id="kpi-avg-attendance" class="text-3xl font-extrabold text-on-surface tracking-tighter">--</span>
 <div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="w-[90%] h-full bg-primary-container"></div>
+<div id="kpi-avg-bar" class="w-[0%] h-full bg-primary-container transition-all duration-500"></div>
 </div>
 </div>
 </div>
@@ -196,50 +152,18 @@
 <option>Last 30 Days</option>
 </select>
 </div>
-<!-- Mock Chart Visualization -->
-<div class="relative h-64 w-full flex items-end justify-between px-2"><!-- Grid Lines -->
+<!-- Dynamic Chart Visualization -->
+<div id="attendance-chart" class="relative h-64 w-full flex items-end justify-between px-2">
+<!-- Grid Lines -->
 <div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
 <div class="border-t border-outline-variant w-full h-px"></div>
 <div class="border-t border-outline-variant w-full h-px"></div>
 <div class="border-t border-outline-variant w-full h-px"></div>
 <div class="border-t border-outline-variant w-full h-px"></div>
 </div>
-<!-- Bars with numerical labels -->
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-on-surface-variant mb-1">942</span>
-<div class="w-8 bg-surface-container-high rounded-t-sm h-[70%] group-hover:bg-primary transition-colors"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Mon</span>
+<!-- Bars will be rendered by JS -->
+<div class="flex items-center justify-center w-full h-full text-sm text-on-surface-variant">Loading chart...</div>
 </div>
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-on-surface-variant mb-1">1105</span>
-<div class="w-8 bg-surface-container-high rounded-t-sm h-[85%] group-hover:bg-primary transition-colors"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Tue</span>
-</div>
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-on-surface-variant mb-1">1080</span>
-<div class="w-8 bg-surface-container-high rounded-t-sm h-[82%] group-hover:bg-primary transition-colors"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Wed</span>
-</div>
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-on-surface-variant mb-1">1180</span>
-<div class="w-8 bg-surface-container-high rounded-t-sm h-[90%] group-hover:bg-primary transition-colors"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Thu</span>
-</div>
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-primary mb-1">1204</span>
-<div class="w-8 bg-primary rounded-t-sm h-[92%]"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Fri</span>
-</div>
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-on-surface-variant mb-1">520</span>
-<div class="w-8 bg-surface-container-high rounded-t-sm h-[40%] group-hover:bg-primary transition-colors"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Sat</span>
-</div>
-<div class="flex flex-col items-center group w-full h-full justify-end">
-<span class="text-[9px] font-bold text-on-surface-variant mb-1">480</span>
-<div class="w-8 bg-surface-container-high rounded-t-sm h-[35%] group-hover:bg-primary transition-colors"></div>
-<span class="text-[10px] font-bold text-on-surface-variant mt-2 uppercase tracking-tighter">Sun</span>
-</div></div>
 </div>
 <!-- Gate 04 Camera Feed -->
 <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
@@ -276,105 +200,10 @@
 <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden h-full">
 <div class="p-6 pb-4 border-b border-surface-container">
 <h3 class="text-lg font-bold text-on-surface tracking-tight">Recent Activity</h3>
-<p class="text-xs text-on-surface-variant mt-1">Last updated 2 minutes ago</p>
+<p id="activity-last-updated" class="text-xs text-on-surface-variant mt-1">Loading...</p>
 </div>
-<div class="divide-y divide-surface-container-low">
-<!-- Entry 1 -->
-<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant">person</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<span class="text-xs font-bold text-on-surface">Marcus Chen</span>
-<span class="text-[10px] font-mono text-on-surface-variant">14:12</span>
-</div>
-<div class="flex justify-between items-center mt-1">
-<span class="text-[10px] font-mono text-on-surface-variant">EMP-8821</span>
-<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
-</div>
-</div>
-</div>
-<!-- Entry 2 -->
-<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant">person</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<span class="text-xs font-bold text-on-surface">Elena Rodriguez</span>
-<span class="text-[10px] font-mono text-on-surface-variant">14:09</span>
-</div>
-<div class="flex justify-between items-center mt-1">
-<span class="text-[10px] font-mono text-on-surface-variant">EMP-9033</span>
-<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
-</div>
-</div>
-</div>
-<!-- Entry 3 -->
-<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant">person</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<span class="text-xs font-bold text-on-surface">Samuel Okoro</span>
-<span class="text-[10px] font-mono text-on-surface-variant">14:05</span>
-</div>
-<div class="flex justify-between items-center mt-1">
-<span class="text-[10px] font-mono text-on-surface-variant">EMP-7712</span>
-<span class="px-1.5 py-0.5 bg-error-container/20 text-error text-[9px] font-bold rounded-sm uppercase tracking-wide">Out-Time</span>
-</div>
-</div>
-</div>
-<!-- Entry 4 -->
-<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant">person</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<span class="text-xs font-bold text-on-surface">Linh Pham</span>
-<span class="text-[10px] font-mono text-on-surface-variant">13:58</span>
-</div>
-<div class="flex justify-between items-center mt-1">
-<span class="text-[10px] font-mono text-on-surface-variant">EMP-1029</span>
-<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
-</div>
-</div>
-</div>
-<!-- Entry 5 -->
-<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant">person</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<span class="text-xs font-bold text-on-surface">David Miller</span>
-<span class="text-[10px] font-mono text-on-surface-variant">13:55</span>
-</div>
-<div class="flex justify-between items-center mt-1">
-<span class="text-[10px] font-mono text-on-surface-variant">EMP-9421</span>
-<span class="px-1.5 py-0.5 bg-tertiary-container/10 text-tertiary-fixed-dim text-[9px] font-bold rounded-sm uppercase tracking-wide">In-Time</span>
-</div>
-</div>
-</div>
-<!-- Entry 6 -->
-<div class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer flex items-center space-x-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant">person</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between">
-<span class="text-xs font-bold text-on-surface">Sarah Connor</span>
-<span class="text-[10px] font-mono text-on-surface-variant">13:48</span>
-</div>
-<div class="flex justify-between items-center mt-1">
-<span class="text-[10px] font-mono text-on-surface-variant">EMP-3044</span>
-<span class="px-1.5 py-0.5 bg-error-container/20 text-error text-[9px] font-bold rounded-sm uppercase tracking-wide">Out-Time</span>
-</div>
-</div>
-</div>
+<div id="activity-feed" class="divide-y divide-surface-container-low">
+<div class="p-4 text-center text-sm text-on-surface-variant">Loading recent activity...</div>
 </div>
 <div class="p-4 text-center">
 <button class="text-xs font-bold text-primary hover:underline uppercase tracking-widest">View All Logs</button>

@@ -6,11 +6,11 @@
 class Router {
     constructor() {
         this.routes = {
-            'dashboard': '../operations_dashboard/code.html',
-            'registration': '../employee_registration_updated/code.html',
-            'enrollment': '../biometric_enrollment_expanded/code.html',
-            'attendance': '../live_attendance/code.html',
-            'reports': '../attendance_reports_simplified/code.html',
+            'dashboard': '/dashboard',
+            'registration': '/registration',
+            'enrollment': '/enrollment',
+            'attendance': '/attendance',
+            'reports': '/reports',
         };
     }
 

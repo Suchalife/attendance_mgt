@@ -155,32 +155,44 @@ def get_attendance():
 @attendance_bp.route('/api/attendance/stats', methods=['GET'])
 def get_attendance_stats():
     """
-    Get attendance statistics
-    
+    Get attendance statistics including KPIs, weekly trend, and recent activity
+
     Returns:
-        JSON response with attendance stats
+        JSON response with full dashboard stats
     """
     try:
         stats = attendance_service.get_attendance_stats()
-        
+
         # Get total employees count
         employees = csv_service.read_csv('employees.csv')
         total_employees = len(employees)
-        
+
         # Calculate absent
         present_today = stats.get('present_today', 0)
         absent_today = max(0, total_employees - present_today)
-        
+
+        # Get weekly trend
+        weekly_trend = attendance_service.get_weekly_trend()
+
+        # Get recent activity
+        recent_activity = attendance_service.get_recent_activity(limit=6)
+
+        # Get average attendance percentage
+        avg_attendance_pct = attendance_service.get_avg_attendance_pct(total_employees)
+
         return jsonify({
             'success': True,
             'stats': {
                 'total_employees': total_employees,
                 'present_today': present_today,
                 'absent_today': absent_today,
+                'avg_attendance_pct': avg_attendance_pct,
                 'total_records': stats.get('total_records', 0)
-            }
+            },
+            'weekly_trend': weekly_trend,
+            'recent_activity': recent_activity
         }), 200
-        
+
     except Exception as e:
         return jsonify({
             'success': False,

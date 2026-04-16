@@ -2,7 +2,7 @@
 Attendance Service for managing attendance records
 Simple service using CSV storage
 """
-from datetime import datetime
+from datetime import datetime, timedelta
 from services.csv_service import CSVService
 
 
@@ -169,34 +169,127 @@ class AttendanceService:
     def get_attendance_stats(self):
         """
         Get attendance statistics for today
-        
+
         Returns:
-            dict: Statistics with total_employees, present_today, absent_today
+            dict: Statistics with present_today (unique employees), total_records
         """
         try:
             # Get today's date
             today = datetime.now().strftime('%Y-%m-%d')
-            
+
             # Get today's attendance
             today_records = self.get_attendance_by_date(today)
-            
-            # Count present employees
-            present_today = len(today_records)
-            
-            # For now, we can't calculate absent without knowing total employees
-            # This will be enhanced when we integrate with employee service
-            
+
+            # Count unique present employees (not duplicate records)
+            unique_present = set()
+            for record in today_records:
+                emp_id = record.get('employeeId')
+                if emp_id:
+                    unique_present.add(emp_id)
+
             return {
-                'present_today': present_today,
+                'present_today': len(unique_present),
                 'total_records': len(self.get_all_attendance())
             }
-            
+
         except Exception as e:
             print(f"Error calculating stats: {e}")
             return {
                 'present_today': 0,
                 'total_records': 0
             }
+
+    def get_weekly_trend(self):
+        """
+        Get attendance counts for the last 7 days
+
+        Returns:
+            list: List of dicts with date, day_name, and count of unique present employees
+        """
+        try:
+            all_records = self.get_all_attendance()
+            today = datetime.now().date()
+            trend = []
+
+            for i in range(6, -1, -1):
+                day = today - timedelta(days=i)
+                date_str = day.strftime('%Y-%m-%d')
+                day_name = day.strftime('%a')
+
+                # Count unique employees for this day
+                unique_present = set()
+                for record in all_records:
+                    if record.get('timestamp', '').startswith(date_str):
+                        emp_id = record.get('employeeId')
+                        if emp_id:
+                            unique_present.add(emp_id)
+
+                trend.append({
+                    'date': date_str,
+                    'day': day_name,
+                    'count': len(unique_present)
+                })
+
+            return trend
+        except Exception as e:
+            print(f"Error calculating weekly trend: {e}")
+            return []
+
+    def get_recent_activity(self, limit=6):
+        """
+        Get most recent attendance records
+
+        Args:
+            limit: Maximum number of records to return
+
+        Returns:
+            list: Most recent attendance records sorted by timestamp descending
+        """
+        try:
+            all_records = self.get_all_attendance()
+
+            # Sort by timestamp descending
+            sorted_records = sorted(
+                all_records,
+                key=lambda r: r.get('timestamp', ''),
+                reverse=True
+            )
+
+            return sorted_records[:limit]
+        except Exception as e:
+            print(f"Error getting recent activity: {e}")
+            return []
+
+    def get_avg_attendance_pct(self, total_employees):
+        """
+        Calculate average attendance percentage over the last 7 days
+
+        Args:
+            total_employees: Total number of registered employees
+
+        Returns:
+            float: Average attendance percentage
+        """
+        try:
+            if total_employees == 0:
+                return 0.0
+
+            trend = self.get_weekly_trend()
+            # Only count days that have passed (with any data or today/past)
+            days_with_data = [d for d in trend if d['count'] > 0]
+
+            if not days_with_data:
+                return 0.0
+
+            total_pct = sum(
+                (d['count'] / total_employees) * 100
+                for d in days_with_data
+            )
+
+            return round(total_pct / len(days_with_data), 1)
+        except Exception as e:
+            print(f"Error calculating avg attendance: {e}")
+            return 0.0
 
 
 # Global attendance service instance
