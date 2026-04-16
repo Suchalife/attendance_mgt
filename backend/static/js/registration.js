@@ -26,6 +26,14 @@
         if (resetButton) {
             resetButton.addEventListener('click', handleReset);
         }
+
+        // Phone number: block non-digit input
+        const phoneInput = document.getElementById('phoneInput');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '').slice(0, 10);
+            });
+        }
     }
 
     // Handle save employee
@@ -44,6 +52,12 @@
         // Validate required fields
         if (!employeeId || !employeeName || !department) {
             Utils.showNotification('Please fill in all required fields (Employee ID, Name, Department)', 'error');
+            return;
+        }
+
+        // Validate phone number: exactly 10 digits
+        if (phoneNumber && !/^\d{10}$/.test(phoneNumber)) {
+            Utils.showNotification('Phone number must be exactly 10 digits', 'error');
             return;
         }
 

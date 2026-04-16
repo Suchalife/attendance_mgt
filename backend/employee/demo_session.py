@@ -108,7 +108,7 @@ class EmbeddingCache:
 embedding_cache = EmbeddingCache()
 
 
-def find_best_match_optimized(query_embedding, employees_col, threshold=0.6):
+def find_best_match_optimized(query_embedding, employees_col, threshold=0.3):
     """Optimized database search with caching"""
     cached_embeddings = embedding_cache.get_embeddings(employees_col)
 

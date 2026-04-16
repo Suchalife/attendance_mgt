@@ -9,6 +9,7 @@
     let pollingInterval = null;
     let isAttendanceActive = false;
     let currentSessionId = null;
+    let lastRecognizedEmployeeId = null;
 
     // Initialize attendance page
     function initAttendance() {
@@ -152,6 +153,7 @@
 
                 isAttendanceActive = false;
                 currentSessionId = null;
+                lastRecognizedEmployeeId = null;
 
                 Utils.showNotification('Attendance session stopped', 'success');
 
@@ -186,8 +188,11 @@
             const overlayUnknown = document.getElementById('overlay-unknown');
             const overlayLabel = document.getElementById('overlay-recognized-label');
 
-            if (response.face_detected && response.employee_recognized && response.employee) {
+            if (response.face_detected && response.employee_recognized && response.employee &&
+                response.employee.employeeId && response.employee.employeeId !== 'unknown') {
+                // Valid recognized employee — mark attendance
                 console.log('Employee recognized:', response.employee);
+                lastRecognizedEmployeeId = response.employee.employeeId;
 
                 // Show ONLY green box
                 if (overlayRecognized) {
@@ -207,13 +212,17 @@
                 // Show notification for recognition
                 Utils.showNotification(`${response.employee.employeeName} marked present`, 'success');
             } else if (response.face_detected && !response.employee_recognized) {
-                console.log('Face detected but employee not recognized');
+                // Unknown face — clear previous state, do NOT mark attendance
+                console.log('Unknown person detected - attendance NOT marked');
+                lastRecognizedEmployeeId = null;
 
                 // Show ONLY red box
                 if (overlayUnknown) overlayUnknown.style.display = '';
                 if (overlayRecognized) overlayRecognized.style.display = 'none';
             } else {
+                // No face detected — clear all state
                 console.log('No face detected in current frame');
+                lastRecognizedEmployeeId = null;
 
                 // Hide both boxes when no face detected
                 if (overlayRecognized) overlayRecognized.style.display = 'none';

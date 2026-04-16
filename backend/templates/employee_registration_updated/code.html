@@ -149,7 +149,7 @@
 <!-- Phone Number -->
 <div class="flex flex-col space-y-1.5">
 <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Phone Number</label>
-<input class="bg-surface-container-low border-none focus:ring-0 focus:border-b-2 focus:border-primary focus:bg-surface-container-lowest transition-all rounded-lg p-3 text-sm placeholder:text-slate-400" placeholder="+1 (555) 000-0000" type="tel"/>
+<input id="phoneInput" class="bg-surface-container-low border-none focus:ring-0 focus:border-b-2 focus:border-primary focus:bg-surface-container-lowest transition-all rounded-lg p-3 text-sm placeholder:text-slate-400" placeholder="Enter 10-digit number" type="tel" maxlength="10" pattern="[0-9]{10}" inputmode="numeric"/>
 </div>
 </div>
 <!-- Action Buttons -->

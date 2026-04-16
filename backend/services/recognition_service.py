@@ -136,7 +136,7 @@ class RecognitionService:
             print(f"Error extracting face embedding: {e}")
             return None
     
-    def find_best_match(self, query_embedding, threshold=0.6):
+    def find_best_match(self, query_embedding, threshold=0.3):
         """
         Find the best matching employee for a query embedding
         

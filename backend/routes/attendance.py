@@ -64,31 +64,37 @@ def start_attendance():
         
         # Recognize employee from frame
         recognition_result = recognition_service.recognize_employee(frame_bytes, employees)
-        
-        # If face detected and employee recognized, mark attendance
-        if recognition_result['face_detected'] and recognition_result['employee_id']:
+
+        # Extract and validate employee ID
+        employee_id = recognition_result.get('employee_id')
+
+        # If face detected and employee is a valid recognized match, mark attendance
+        if (recognition_result['face_detected']
+                and employee_id
+                and str(employee_id).strip()
+                and str(employee_id).strip().lower() != 'unknown'):
             attendance_result = attendance_service.mark_attendance(
-                employee_id=recognition_result['employee_id'],
+                employee_id=employee_id,
                 employee_name=recognition_result['employee_name'],
                 department=recognition_result['department'],
                 status='Present',
                 session_id=session_id
             )
-            
+
             return jsonify({
                 'success': True,
                 'session_id': session_id,
                 'face_detected': True,
                 'employee_recognized': True,
                 'employee': {
-                    'employeeId': recognition_result['employee_id'],
+                    'employeeId': employee_id,
                     'employeeName': recognition_result['employee_name'],
                     'department': recognition_result['department']
                 },
                 'attendance': attendance_result,
                 'message': recognition_result['message']
             }), 200
-        
+
         # Face detected but no employee recognized
         elif recognition_result['face_detected']:
             return jsonify({
